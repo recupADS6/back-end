@@ -18,21 +18,21 @@ public class Job {
 	private long id;
 	
 	@Column(name="job_title")
-	private String title;
+	private String jobTitle;
 	
 	@Column(name="job_level")
-	private String level;
+	private String jobLevel;
 	
 	@Column(name="job_description")
-	private String description;
+	private String jobDescription;
 	
 	@Column (name="cha")
 	private String cha;
 
-	public Job(String title, String level, String description, String cha) {
-		this.title = title;
-		this.level = level;
-		this.description = description;
+	public Job(String jobTitle, String jobLevel, String jobDescription, String cha) {
+		this.jobTitle = jobTitle;
+		this.jobLevel = jobLevel;
+		this.jobDescription = jobDescription;
 		this.cha= cha;
 	}
 	
@@ -43,30 +43,31 @@ public class Job {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public String getTitle() {
-		return title;
+	
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 
-	public String getLevel() {
-		return level;
+	public String getJobLevel() {
+		return jobLevel;
 	}
 
-	public void setLevel(String level) {
-		this.level = level;
+	public void setJobLevel(String jobLevel) {
+		this.jobLevel = jobLevel;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
+
 	public String getCha() {
 		return cha;
 	}

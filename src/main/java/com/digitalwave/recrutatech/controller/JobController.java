@@ -27,7 +27,7 @@ public class JobController {
 		return service.findAllJobs();
 	}
 	
-	@PostMapping
+	@PostMapping("/add")
 	public Job newJob(@RequestBody Job job) {
 		return service.newJob(job);
 	}

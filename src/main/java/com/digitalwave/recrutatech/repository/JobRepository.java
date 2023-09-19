@@ -9,18 +9,18 @@ import com.digitalwave.recrutatech.entity.Job;
 
 public interface JobRepository extends JpaRepository<Job, Long> {
 
-	public Optional<Job> findByTitle(String title);
+	public Optional<Job> findByJobTitle(String jobTitle);
 	
-	@Query("select j from Job j where j.title = ?1")
-	public Optional<Job> buscarPorTitulo(String title);
+	@Query("select j from Job j where j.jobTitle = ?1")
+	public Optional<Job> buscarPorTitulo(String jobTitle);
 	
-	public Optional<Job> findByLevel(String level);
+	public Optional<Job> findByJobLevel(String jobLevel);
 	
-	@Query("select j from Job j where j.level = ?1")
-	public Optional<Job> buscarPorNivel(String level);
+	@Query("select j from Job j where j.jobLevel = ?1")
+	public Optional<Job> buscarPorNivel(String jobLevel);
 	
-	public Optional<Job> findByDescription(String description);
+	public Optional<Job> findByJobDescription(String jobDescription);
 	
-	@Query("select j from Job j where j.description = ?1")
-	public Optional<Job> buscarPelaDescricao(String description);
+	@Query("select j from Job j where j.jobDescription = ?1")
+	public Optional<Job> buscarPelaDescricao(String jobDescription);
 }
