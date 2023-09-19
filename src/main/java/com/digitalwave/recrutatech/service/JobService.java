@@ -15,7 +15,7 @@ public class JobService implements IJobService {
 	
 	@Autowired
 	private JobRepository jobRepo;
-	
+	/*
 	@Transactional
 	public Job newJob(Job job) {
 		if(job == null ||
@@ -27,7 +27,7 @@ public class JobService implements IJobService {
 		}
 		return job;
 	}
-	
+	*/
 	public List<Job> findAllJobs(){
 		return jobRepo.findAll();
 	}
@@ -39,4 +39,10 @@ public class JobService implements IJobService {
         }
         return jobOp.get();
     }
+
+	@Override
+	public Job newJob(Job job) {
+		// TODO Auto-generated method stub
+		return job;
+	}
 }
