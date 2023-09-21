@@ -26,13 +26,20 @@ public class Job {
 	@Column(name="job_description")
 	private String jobDescription;
 	
+	@Column(name="job_status")
+	private String jobStatus;
+	
 	@Column (name="cha")
 	private String cha;
+	
+    public Job() {
+    }
 
-	public Job(String jobTitle, String jobLevel, String jobDescription, String cha) {
+	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, String cha) {
 		this.jobTitle = jobTitle;
 		this.jobLevel = jobLevel;
 		this.jobDescription = jobDescription;
+		this.jobStatus = jobStatus;
 		this.cha= cha;
 	}
 	
@@ -67,6 +74,14 @@ public class Job {
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
 	}
+	
+	public String getJobStatus() {
+		return jobStatus;
+	}
+
+	public void setJobStatus(String jobStatus) {
+		this.jobStatus = jobStatus;
+	}
 
 	public String getCha() {
 		return cha;
@@ -75,8 +90,6 @@ public class Job {
 	public void setCha(String cha) {
 		this.cha = cha;
 	}
-
-
 }
 
 

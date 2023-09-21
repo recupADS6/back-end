@@ -32,5 +32,7 @@ public class JobService implements IJobService {
         return jobOp.get();
     }
 
-
+    public List<Job> findAllJobStatus(String jobStatus) {
+        return jobRepo.findAllByJobStatus(jobStatus);
+    }
 }

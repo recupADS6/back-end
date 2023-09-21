@@ -11,5 +11,7 @@ public interface IJobService {
 	public List<Job> findAllJobs();
 	
 	public Job findJobId (Long id);
+	
+	public List<Job> findAllJobStatus (String jobStatus);
 
 }

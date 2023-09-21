@@ -1,5 +1,6 @@
 package com.digitalwave.recrutatech.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,7 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 	
 	@Query("select j from Job j where j.jobDescription = ?1")
 	public Optional<Job> buscarPelaDescricao(String jobDescription);
+
+	public List<Job> findAllByJobStatus(String jobStatus);
+
 }

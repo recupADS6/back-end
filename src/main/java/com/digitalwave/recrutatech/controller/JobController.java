@@ -22,7 +22,7 @@ public class JobController {
 	@Autowired
 	private IJobService service;
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<Job> allJobs(){
 		return service.findAllJobs();
 	}
@@ -36,4 +36,9 @@ public class JobController {
 	public Job findId (@PathVariable("id") Long id) {
 		return service.findJobId(id);
 	}
+	
+    @GetMapping("/status/")
+    public List<Job> getJobsByStatus(String jobStatus) {
+        return service.findAllJobStatus(jobStatus);
+    }
 }
