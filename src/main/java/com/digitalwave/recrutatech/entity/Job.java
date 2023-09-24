@@ -1,10 +1,13 @@
 package com.digitalwave.recrutatech.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,18 +32,19 @@ public class Job {
 	@Column(name="job_status")
 	private String jobStatus;
 	
-	@Column (name="cha")
-	private String cha;
-	
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "conhecimento_id") 
+    private Conhecimento conhecimento;
+    
     public Job() {
     }
 
-	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, String cha) {
+	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, Conhecimento conhecimento) {
 		this.jobTitle = jobTitle;
 		this.jobLevel = jobLevel;
 		this.jobDescription = jobDescription;
 		this.jobStatus = jobStatus;
-		this.cha= cha;
+		this.conhecimento= conhecimento;
 	}
 	
 	public long getId() {
@@ -83,13 +87,13 @@ public class Job {
 		this.jobStatus = jobStatus;
 	}
 
-	public String getCha() {
-		return cha;
-	}
+    public Conhecimento getConhecimento() {
+        return conhecimento;
+    }
 
-	public void setCha(String cha) {
-		this.cha = cha;
-	}
+    public void setConhecimento(Conhecimento conhecimento) {
+        this.conhecimento = conhecimento;
+    }
 }
 
 
