@@ -13,5 +13,9 @@ public interface IJobService {
 	public Job findJobId (Long id);
 	
 	public List<Job> findAllJobStatus (String jobStatus);
+	
+    public Job updateJob(Long id, Job updatedJob);
+    
+    void deleteJob(Long id);
 
 }
