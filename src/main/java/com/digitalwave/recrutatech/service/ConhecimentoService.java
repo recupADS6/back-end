@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.digitalwave.recrutatech.Interfaces.IConhecimentoService;
 import com.digitalwave.recrutatech.entity.Conhecimento;
 import com.digitalwave.recrutatech.repository.ConhecimentoRepository;
 
