@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.digitalwave.recrutatech.Interfaces.IUserService;
 import com.digitalwave.recrutatech.entity.User;
+import com.digitalwave.recrutatech.interfaces.IUserService;
 import com.digitalwave.recrutatech.repository.UserRepository;
 
 import jakarta.transaction.Transactional;

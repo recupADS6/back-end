@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalwave.recrutatech.entity.Job;
+import com.digitalwave.recrutatech.interfaces.IJobService;
 import com.digitalwave.recrutatech.repository.JobRepository;
-import com.digitalwave.recrutatech.Interfaces.IJobService;
 
 @Service
 public class JobService implements IJobService {

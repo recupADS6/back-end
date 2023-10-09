@@ -1,8 +1,8 @@
-package com.digitalwave.recrutatech.Interfaces;
+package com.digitalwave.recrutatech.interfaces;
 
 import java.util.List;
 import com.digitalwave.recrutatech.entity.Conhecimento;
-import com.digitalwave.recrutatech.Interfaces.IConhecimentoService;
+import com.digitalwave.recrutatech.interfaces.IConhecimentoService;
 
 public interface IConhecimentoService {
 	public Conhecimento newConhecimento(Conhecimento conhecimento);
