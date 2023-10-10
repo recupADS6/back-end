@@ -2,7 +2,6 @@ package com.digitalwave.recrutatech.service;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,25 +23,11 @@ public class UserService implements IUserService {
 
   @Transactional
   public User createUser(User user) {
-    if (user == null ||
-        user.getUserName() == null ||
-        user.getUserName().isBlank() ||
-        user.getUserEmail() == null ||
-        user.getUserEmail().isBlank() ||
-        user.getUserPassword() == null ||
-        user.getUserPassword().isBlank()) {
-      throw new IllegalArgumentException("Dados inválidos!");
-    }
-
-    try {
-      user.setUserStatus(true); // Defina o status como true por padrão
-      user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-      user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-      user = userRepo.save(user);
-    } catch (Exception e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao inserir usuário!");
-    }
-    return user;
+    validateUser(user);
+    user.setUserStatus(true); // Defina o status como true por padrão
+    user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+    user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+    return userRepo.save(user);
   }
 
   public List<User> getAllUsers() {
@@ -50,63 +35,52 @@ public class UserService implements IUserService {
   }
 
   public User getById(Long id) {
-    Optional<User> userOp = userRepo.findById(id);
-    if (userOp.isEmpty()) {
-      throw new IllegalArgumentException("Usuário não encontrado!");
-    }
-    return userOp.get();
+    return userRepo.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
   }
 
-  @Override
+  @Transactional
   public User updateUser(Long id, User updatedUser) {
-    try {
-      Optional<User> userOp = userRepo.findById(id);
+    User existingUser = userRepo.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
 
-      if (userOp.isPresent()) {
-        User existingUser = userOp.get();
+    // Atualize os campos do usuário existente conforme necessário
+    if (!ObjectUtils.isEmpty(updatedUser.getUserName())) {
+        existingUser.setUserName(updatedUser.getUserName());
+    }
+    if (!ObjectUtils.isEmpty(updatedUser.getUserEmail())) {
+        existingUser.setUserEmail(updatedUser.getUserEmail());
+    }
+    if (!ObjectUtils.isEmpty(updatedUser.getUserRole())) {
+        existingUser.setUserRole(updatedUser.getUserRole());
+    }
+    if (!ObjectUtils.isEmpty(updatedUser.getUserStatus())) {
+        existingUser.setUserStatus(updatedUser.getUserStatus());
+    }
 
-        if (!ObjectUtils.isEmpty(updatedUser.getUserName())) {
-          existingUser.setUserName(updatedUser.getUserName());
-        }
+    existingUser.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+    return userRepo.save(existingUser);
+  }
 
-        if (!ObjectUtils.isEmpty(updatedUser.getUserEmail())) {
-          existingUser.setUserEmail(updatedUser.getUserEmail());
-        }
+  @Transactional
+  public User deleteUser(Long id) {
+    User user = userRepo.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
 
-        if (!ObjectUtils.isEmpty(updatedUser.getUserRole())) {
-          existingUser.setUserRole(updatedUser.getUserRole());
-        }
+    userRepo.deleteById(id);
+    return user;
+  }
 
-        if (!ObjectUtils.isEmpty(updatedUser.getUserStatus())) {
-          existingUser.setUserStatus(updatedUser.getUserStatus());
-        }
-
-        existingUser.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        return userRepo.save(existingUser);
-      } else {
-        throw new IllegalArgumentException("Vaga não encontrada - ID: " + id);
-      }
-    } catch (Exception e) {
-      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao atualizar o usuário", e);
+  private void validateUser(User user) {
+    if (user == null || 
+        isNullOrBlank(user.getUserName()) || 
+        isNullOrBlank(user.getUserEmail()) || 
+        isNullOrBlank(user.getUserPassword())) {
+      throw new IllegalArgumentException("Dados inválidos!");
     }
   }
 
-  @Override
-  public User deleteUser(Long id) {
-    try {
-      Optional<User> userOp = userRepo.findById(id);
-      
-      if (userOp.isPresent()) {
-        User user = userOp.get();
-        userRepo.deleteById(id);
-        return user;
-      } else {
-        throw new IllegalArgumentException("Usuário não encontrado - ID: " + id);
-      }
-    } catch (IllegalArgumentException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
-    } catch (Exception e) {
-      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao excluir o usuário", e);
-    }
+  private boolean isNullOrBlank(String value) {
+    return value == null || value.trim().isEmpty();
   }
 }
