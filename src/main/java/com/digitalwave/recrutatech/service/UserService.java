@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.digitalwave.recrutatech.entity.User;
 import com.digitalwave.recrutatech.interfaces.IUserService;
@@ -21,9 +22,17 @@ public class UserService implements IUserService {
   @Autowired
   private UserRepository userRepo;
 
+  private BCryptPasswordEncoder passwordEncoder;
+
   @Transactional
   public User createUser(User user) {
     validateUser(user);
+
+    // Criptografa a senha usando BCrypt
+    passwordEncoder = new BCryptPasswordEncoder();
+    String hashedPassword = passwordEncoder.encode(user.getUserPassword());
+    user.setUserPassword(hashedPassword);
+    
     user.setUserStatus(true); // Defina o status como true por padrão
     user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
     user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

@@ -1,5 +1,7 @@
 package com.digitalwave.recrutatech.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class User {
   private String userEmail;
 
   @Column(name = "user_password")
+  //@JsonIgnore
   private String userPassword;
 
   @Column(name = "user_role")
