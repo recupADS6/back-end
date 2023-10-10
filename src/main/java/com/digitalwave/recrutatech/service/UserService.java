@@ -90,4 +90,23 @@ public class UserService implements IUserService {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao atualizar o usuário", e);
     }
   }
+
+  @Override
+  public User deleteUser(Long id) {
+    try {
+      Optional<User> userOp = userRepo.findById(id);
+      
+      if (userOp.isPresent()) {
+        User user = userOp.get();
+        userRepo.deleteById(id);
+        return user;
+      } else {
+        throw new IllegalArgumentException("Usuário não encontrado - ID: " + id);
+      }
+    } catch (IllegalArgumentException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao excluir o usuário", e);
+    }
+  }
 }
