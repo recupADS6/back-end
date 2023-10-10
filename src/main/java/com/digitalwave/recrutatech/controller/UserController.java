@@ -33,4 +33,14 @@ public class UserController {
     User user = userService.getById(id);
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<User> updateJob(@PathVariable("id") long id, @RequestBody User updatedUser) {
+    User updatedUserEntity = userService.updateUser(id, updatedUser);
+    if (updatedUserEntity != null) {
+      return ResponseEntity.ok(updatedUserEntity);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
 }
