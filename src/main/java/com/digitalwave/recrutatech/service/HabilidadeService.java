@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.digitalwave.recrutatech.entity.Habilidade;
 import com.digitalwave.recrutatech.interfaces.IHabilidadeService;
 import com.digitalwave.recrutatech.repository.HabilidadeRepository;
 
+@Service
 public class HabilidadeService implements IHabilidadeService {
 	
 	@Autowired
