@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalwave.recrutatech.entity.Conhecimento;
-import com.digitalwave.recrutatech.service.IConhecimentoService;
+import com.digitalwave.recrutatech.interfaces.IConhecimentoService;
 
 @RestController
 @RequestMapping(value="/cha")

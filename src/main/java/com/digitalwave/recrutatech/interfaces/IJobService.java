@@ -1,4 +1,4 @@
-package com.digitalwave.recrutatech.service;
+package com.digitalwave.recrutatech.interfaces;
 
 import java.util.List;
 

@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 
 import com.digitalwave.recrutatech.entity.Conhecimento;
 import com.digitalwave.recrutatech.entity.Job;
-import com.digitalwave.recrutatech.repository.ConhecimentoRepository;
+import com.digitalwave.recrutatech.interfaces.IJobService;
 import com.digitalwave.recrutatech.repository.JobRepository;
 
 import jakarta.persistence.EntityNotFoundException;
