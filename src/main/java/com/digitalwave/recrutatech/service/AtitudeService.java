@@ -26,7 +26,7 @@ public class AtitudeService implements IAtitudeService {
     public Atitude findAtitudeId(Long id) {
         Optional<Atitude> aOp = aRepo.findById(id);
         if(aOp.isEmpty()) {
-            throw new IllegalArgumentException("Vaga não encontrada!");
+            throw new IllegalArgumentException("Atitude não encontrada!");
         }
         return aOp.get();
     }

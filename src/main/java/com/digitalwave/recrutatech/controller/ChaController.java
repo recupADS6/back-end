@@ -10,25 +10,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digitalwave.recrutatech.entity.Atitude;
+import com.digitalwave.recrutatech.entity.Cha;
 import com.digitalwave.recrutatech.entity.Conhecimento;
-import com.digitalwave.recrutatech.interfaces.IConhecimentoService;
+import com.digitalwave.recrutatech.entity.Habilidade;
+import com.digitalwave.recrutatech.interfaces.IChaService;
 
 @RestController
-@RequestMapping(value="/con")
+@RequestMapping(value="/cha")
 @CrossOrigin
-
-public class ConhecimentoController {
+public class ChaController {
+	
 	@Autowired
-	private IConhecimentoService service;
+	private IChaService service;
 	
 	@GetMapping("/")
-	public List<Conhecimento> allConhecimento(){
-		return service.findAllConhecimento();
+	public List<Cha> allCha(){
+		return service.findAllCha();
 	}
 	
 	@PostMapping("/add")
-	public Conhecimento newConhecimento(@RequestBody Conhecimento conhecimento) {
-		return service.newConhecimento(conhecimento);
+	public Cha createCha(@RequestBody Conhecimento conhecimento, @RequestBody Habilidade habilidade, @RequestBody Atitude atitude) {
+		return service.createCha(conhecimento, habilidade, atitude);
 	}
+
 
 }

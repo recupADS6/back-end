@@ -28,7 +28,7 @@ public class ConhecimentoService implements IConhecimentoService {
     public Conhecimento findConhecimentoId(Long id) {
         Optional<Conhecimento> cOp = cRepo.findById(id);
         if(cOp.isEmpty()) {
-            throw new IllegalArgumentException("Vaga não encontrada!");
+            throw new IllegalArgumentException("Conhecimento não encontrado!");
         }
         return cOp.get();
     }

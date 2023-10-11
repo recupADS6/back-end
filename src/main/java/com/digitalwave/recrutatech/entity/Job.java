@@ -33,18 +33,19 @@ public class Job {
 	private String jobStatus;
 	
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "conhecimento_id") 
-    private Conhecimento conhecimento;
+    @JoinColumn(name = "cha_id")
+    private Cha cha;
+
     
     public Job() {
     }
 
-	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, Conhecimento conhecimento) {
+	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, Cha cha) {
 		this.jobTitle = jobTitle;
 		this.jobLevel = jobLevel;
 		this.jobDescription = jobDescription;
 		this.jobStatus = jobStatus;
-		this.conhecimento= conhecimento;
+		this.cha = cha;
 	}
 	
 	public long getId() {
@@ -87,12 +88,12 @@ public class Job {
 		this.jobStatus = jobStatus;
 	}
 
-    public Conhecimento getConhecimento() {
-        return conhecimento;
+    public Cha getCha() {
+        return cha;
     }
 
-    public void setConhecimento(Conhecimento conhecimento) {
-        this.conhecimento = conhecimento;
+    public void setCha(Cha cha) {
+        this.cha = cha;
     }
 }
 

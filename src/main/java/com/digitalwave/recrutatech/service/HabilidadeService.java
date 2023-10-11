@@ -26,7 +26,7 @@ public class HabilidadeService implements IHabilidadeService {
     public Habilidade findHabilidadeId(Long id) {
         Optional<Habilidade> hOp = hRepo.findById(id);
         if(hOp.isEmpty()) {
-            throw new IllegalArgumentException("Vaga não encontrada!");
+            throw new IllegalArgumentException("Habilidade não encontrada!");
         }
         return hOp.get();
     }

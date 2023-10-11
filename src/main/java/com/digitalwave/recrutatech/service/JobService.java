@@ -6,11 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
-
-import com.digitalwave.recrutatech.entity.Conhecimento;
+import com.digitalwave.recrutatech.entity.Cha;
 import com.digitalwave.recrutatech.entity.Job;
 import com.digitalwave.recrutatech.interfaces.IJobService;
+import com.digitalwave.recrutatech.repository.ChaRepository;
 import com.digitalwave.recrutatech.repository.JobRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -22,14 +21,14 @@ public class JobService implements IJobService {
 	private JobRepository jobRepo;
 	
 	@Autowired
-	private ConhecimentoRepository cRepo;
+	private ChaRepository chaRepo;
 	
     @Override
     public Job newJob(Job job) {
-        Long conhecimentoId = job.getConhecimento().getId();
-        Conhecimento conhecimento = cRepo.findById(conhecimentoId)
-                .orElseThrow(() -> new EntityNotFoundException("Conhecimento não encontrado com o ID: " + conhecimentoId));
-        job.setConhecimento(conhecimento);
+        Long chaId = job.getCha().getId();
+        Cha cha = chaRepo.findById(chaId)
+                .orElseThrow(() -> new EntityNotFoundException("Cha não encontrado com o ID: " + chaId));
+        job.setCha(cha);
         return jobRepo.save(job);
     }
 
@@ -55,7 +54,6 @@ public class JobService implements IJobService {
         if (jobOp.isPresent()) {
             Job existingJob = jobOp.get();
 
-            // Atualiza os campos apenas se estiverem presentes no JSON
             if (!ObjectUtils.isEmpty(updatedJob.getJobTitle())) {
                 existingJob.setJobTitle(updatedJob.getJobTitle());
             }
@@ -72,8 +70,8 @@ public class JobService implements IJobService {
                 existingJob.setJobStatus(updatedJob.getJobStatus());
             }
 
-            if (updatedJob.getConhecimento() != null) {
-                existingJob.setConhecimento(updatedJob.getConhecimento());
+            if (updatedJob.getCha() != null) {
+                existingJob.setCha(updatedJob.getCha());
             }
 
             return jobRepo.save(existingJob);
