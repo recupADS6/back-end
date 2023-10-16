@@ -58,7 +58,4 @@ public class Cha {
 	public void setAtitude(Atitude atitude) {
 		this.atitude = atitude;
 	}
-    
-    
-
 }

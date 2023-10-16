@@ -16,7 +16,7 @@ public class Conhecimento {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 	    
-	    @Column(name = "c_content")
+	    @Column(name = "c_content",columnDefinition = "TEXT", length = 1500)
 	    private String content;
 
 		public Long getId() {

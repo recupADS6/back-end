@@ -30,8 +30,12 @@ public class ChaController {
 	}
 	
 	@PostMapping("/add")
-	public Cha createCha(@RequestBody Conhecimento conhecimento, @RequestBody Habilidade habilidade, @RequestBody Atitude atitude) {
-		return service.createCha(conhecimento, habilidade, atitude);
+	public Cha createCha(@RequestBody Cha cha) {
+	    Conhecimento conhecimento = cha.getConhecimento();
+	    Habilidade habilidade = cha.getHabilidade();
+	    Atitude atitude = cha.getAtitude();
+
+	    return service.createCha(conhecimento, habilidade, atitude);
 	}
 
 

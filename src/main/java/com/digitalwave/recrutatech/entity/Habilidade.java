@@ -14,7 +14,7 @@ public class Habilidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "h_content")
+    @Column(name = "h_content",columnDefinition = "TEXT", length = 1500)
     private String content;
 
 	public Long getId() {

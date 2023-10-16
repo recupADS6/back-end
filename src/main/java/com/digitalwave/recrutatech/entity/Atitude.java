@@ -14,7 +14,7 @@ public class Atitude {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "a_content")
+    @Column(name = "a_content",columnDefinition = "TEXT", length = 1500)
     private String content;
 
 	public Long getId() {

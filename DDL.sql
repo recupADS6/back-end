@@ -27,13 +27,29 @@ CREATE TABLE user (
 --     job_level VARCHAR(255),
 --     job_description TEXT,
 --     job_status VARCHAR(255),
+--     cha_id BIGINT,
+--     FOREIGN KEY (cha_id) REFERENCES cha(id)
+-- );
+
+-- CREATE TABLE cha (
+--     cha_id BIGINT AUTO_INCREMENT PRIMARY KEY,
 --     conhecimento_id BIGINT,
---     FOREIGN KEY (conhecimento_id) REFERENCES conhecimento(id)
+--     habilidade_id BIGINT,
+--     atitude_id BIGINT,
+--     FOREIGN KEY (conhecimento_id) REFERENCES conhecimento_id(id)
 -- );
 
 -- CREATE TABLE conhecimento (
 --     id BIGINT AUTO_INCREMENT PRIMARY KEY,
---     content TEXT
+--     c_content TEXT
+-- );
+-- CREATE TABLE habilidade (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     h_content TEXT
+-- );
+-- CREATE TABLE atitude (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     a_content TEXT
 -- );
 
 INSERT INTO user (user_name, user_email, user_password, user_role, user_status, created_at, updated_at)
