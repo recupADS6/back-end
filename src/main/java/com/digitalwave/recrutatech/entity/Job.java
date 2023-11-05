@@ -26,7 +26,7 @@ public class Job {
 	@Column(name="job_level")
 	private String jobLevel;
 	
-	@Column(name="job_description")
+	@Column(name="job_description", length = 1500)
 	private String jobDescription;
 	
 	@Column(name="job_status")

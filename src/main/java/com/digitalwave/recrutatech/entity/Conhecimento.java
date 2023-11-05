@@ -36,7 +36,7 @@ public class Conhecimento {
 		}
 
 	    public void saveConhecimento(String jsonResponse) {
-	        this.content = jsonResponse;
+	        this.content = jsonResponse;;
 	    }
 
 	    @Override

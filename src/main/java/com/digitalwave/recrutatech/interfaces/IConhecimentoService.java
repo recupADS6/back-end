@@ -10,5 +10,9 @@ public interface IConhecimentoService {
 	public List<Conhecimento> findAllConhecimento();
 	
 	public Conhecimento findConhecimentoId (Long id);
+	
+    public Conhecimento updateConhecimento(Long id, Conhecimento updatedConhecimento);
+    
+    void deleteConhecimento(Long id);
 
 }

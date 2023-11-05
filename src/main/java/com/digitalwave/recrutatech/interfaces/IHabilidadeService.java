@@ -10,5 +10,9 @@ public interface IHabilidadeService {
 	public List<Habilidade> findAllHabilidade();
 	
 	public Habilidade findHabilidadeId (Long id);
+	
+    public Habilidade updateHabilidade(Long id, Habilidade updatedHabilidade);
+    
+    void deleteHabilidade(Long id);
 
 }

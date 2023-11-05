@@ -15,6 +15,10 @@ public interface IChaService {
 	public List<Cha> findAllCha();
 	
 	public Cha findChaId (Long id);
+	
+	public Cha updateCha(Long id, Cha updateCha);
+	
+	void deleteCha (Long id);
 
 	
 

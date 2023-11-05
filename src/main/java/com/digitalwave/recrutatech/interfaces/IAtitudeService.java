@@ -10,5 +10,9 @@ public interface IAtitudeService {
 	public List<Atitude> findAllAtitude();
 	
 	public Atitude findAtitudeId (Long id);
+	
+    public Atitude updateAtitude(Long id, Atitude updatedAtitude);
+    
+    void deleteAtitude(Long id);
 
 }

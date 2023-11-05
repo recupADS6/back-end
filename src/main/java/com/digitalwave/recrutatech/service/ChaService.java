@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import com.digitalwave.recrutatech.entity.Atitude;
 import com.digitalwave.recrutatech.entity.Cha;
@@ -15,6 +16,8 @@ import com.digitalwave.recrutatech.repository.AtitudeRepository;
 import com.digitalwave.recrutatech.repository.ChaRepository;
 import com.digitalwave.recrutatech.repository.ConhecimentoRepository;
 import com.digitalwave.recrutatech.repository.HabilidadeRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ChaService implements IChaService {
@@ -68,7 +71,33 @@ public class ChaService implements IChaService {
         }
         return chaOp.get();
     }
+    
+    @Override
+    public Cha updateCha(Long id, Cha updateCha) {
+        Optional<Cha> chaOp = chaRepo.findById(id);
 
+        if (chaOp.isPresent()) {
+            Cha existingCha = chaOp.get();
 
+            if (!ObjectUtils.isEmpty(updateCha.getConhecimento())) {
+            	existingCha.setConhecimento(updateCha.getConhecimento());
+            }
+            if (!ObjectUtils.isEmpty(updateCha.getHabilidade())) {
+            	existingCha.setHabilidade(updateCha.getHabilidade());
+            }
+
+            if (!ObjectUtils.isEmpty(updateCha.getAtitude())) {
+            	existingCha.setAtitude(updateCha.getAtitude());
+            }
+
+            return chaRepo.save(existingCha);
+        } else {
+            throw new EntityNotFoundException("Cha não encontrado - ID: " + id);
+        }
+    }
+    
+	public void deleteCha(Long id) {
+		chaRepo.deleteById(id);
+	}
 
 }
