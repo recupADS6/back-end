@@ -70,7 +70,7 @@ public class JobService implements IJobService {
                 existingJob.setJobStatus(updatedJob.getJobStatus());
             }
 
-            if (updatedJob.getCha() != null) {
+            if (!ObjectUtils.isEmpty(updatedJob.getCha())) {
                 existingJob.setCha(updatedJob.getCha());
             }
 
