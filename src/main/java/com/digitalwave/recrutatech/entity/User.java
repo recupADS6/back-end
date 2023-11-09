@@ -1,5 +1,7 @@
 package com.digitalwave.recrutatech.entity;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,12 +21,12 @@ public class User {
   @Column(name = "user_name")
   private String userName;
 
-  @Column(name = "user_email")
-  private String userEmail;
+  @Column(name = "email")
+  private String email;
 
-  @Column(name = "user_password")
+  @Column(name = "password")
   //@JsonIgnore
-  private String userPassword;
+  private String password;
 
   @Column(name = "user_role")
   private String userRole;
@@ -37,8 +39,25 @@ public class User {
 
   @Column(name = "updated_at")
   private java.sql.Timestamp updatedAt;
+  
+  
 
-  public long getId() {
+  public User(long id, String userName, String email, String password, String userRole, Boolean userStatus,
+  Timestamp createdAt, Timestamp updatedAt) {
+	this.id = id;
+	this.userName = userName;
+	this.email = email;
+	this.password = password;
+	this.userRole = userRole;
+	this.userStatus = userStatus;
+	this.createdAt = createdAt;
+	this.updatedAt = updatedAt;
+  }
+  
+  public User () {
+  }
+
+public long getId() {
     return id;
   }
 
@@ -55,19 +74,19 @@ public class User {
   }
 
   public String getUserEmail() {
-    return userEmail;
+    return email;
   }
 
-  public void setUserEmail(String userEmail) {
-    this.userEmail = userEmail;
+  public void setUserEmail(String email) {
+    this.email = email;
   }
 
   public String getUserPassword() {
-    return userPassword;
+    return password;
   }
 
-  public void setUserPassword(String userPassword) {
-    this.userPassword = userPassword;
+  public void setUserPassword(String password) {
+    this.password = password;
   }
 
   public String getUserRole() {
