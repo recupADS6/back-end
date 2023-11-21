@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.digitalwave.recrutatech.entity.User;
 import com.digitalwave.recrutatech.service.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

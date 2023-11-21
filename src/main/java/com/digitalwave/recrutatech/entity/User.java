@@ -73,19 +73,19 @@ public long getId() {
     this.userName = userName;
   }
 
-  public String getUserEmail() {
+  public String getEmail() {
     return email;
   }
 
-  public void setUserEmail(String email) {
+  public void setEmail(String email) {
     this.email = email;
   }
 
-  public String getUserPassword() {
+  public String getPassword() {
     return password;
   }
 
-  public void setUserPassword(String password) {
+  public void setPassword(String password) {
     this.password = password;
   }
 
