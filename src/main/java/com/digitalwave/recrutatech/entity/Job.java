@@ -17,7 +17,7 @@ public class Job {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "job_id")
+	@Column(name = "job_id")
 	private long id;
 	
 	@Column(name="job_title")
@@ -32,20 +32,19 @@ public class Job {
 	@Column(name="job_status")
 	private String jobStatus;
 	
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cha_id")
-    private Cha cha;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "kaa_id")
+  private KAA kaa;
 
-    
-    public Job() {
-    }
+  
+  public Job() {}
 
-	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, Cha cha) {
+	public Job(String jobTitle, String jobLevel, String jobDescription, String jobStatus, KAA kaa) {
 		this.jobTitle = jobTitle;
 		this.jobLevel = jobLevel;
 		this.jobDescription = jobDescription;
 		this.jobStatus = jobStatus;
-		this.cha = cha;
+		this.kaa = kaa;
 	}
 	
 	public long getId() {
@@ -88,13 +87,12 @@ public class Job {
 		this.jobStatus = jobStatus;
 	}
 
-    public Cha getCha() {
-        return cha;
-    }
+  public KAA getKAA() {
+      return kaa;
+  }
 
-    public void setCha(Cha cha) {
-        this.cha = cha;
-    }
+  public void setKAA(KAA kaa) {
+      this.kaa = kaa;
+  }
+
 }
-
-

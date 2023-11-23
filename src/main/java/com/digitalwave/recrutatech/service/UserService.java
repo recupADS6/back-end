@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.digitalwave.recrutatech.entity.User;
 import com.digitalwave.recrutatech.interfaces.IUserService;
@@ -92,4 +92,5 @@ public class UserService implements IUserService {
   private boolean isNullOrBlank(String value) {
     return value == null || value.trim().isEmpty();
   }
+  
 }

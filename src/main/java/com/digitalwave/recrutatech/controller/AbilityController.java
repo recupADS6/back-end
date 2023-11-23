@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.digitalwave.recrutatech.entity.Habilidade;
-import com.digitalwave.recrutatech.interfaces.IHabilidadeService;
+import com.digitalwave.recrutatech.entity.Ability;
+import com.digitalwave.recrutatech.interfaces.IAbilityService;
 
 @RestController
 @RequestMapping(value="/hab")
 @CrossOrigin
-public class HabilidadeController {
+public class AbilityController {
 	@Autowired
-	private IHabilidadeService service;
+	private IAbilityService service;
 	
 	@GetMapping("/")
-	public List<Habilidade> allHabilidade(){
-		return service.findAllHabilidade();
+	public List<Ability> allAbility(){
+		return service.findAllAbility();
 	}
 	
 	@PostMapping("/add")
-	public Habilidade newHabilidade(@RequestBody Habilidade habilidade) {
-		return service.newHabilidade(habilidade);
+	public Ability newAbility(@RequestBody Ability ability) {
+		return service.newAbility(ability);
 	}
 
 }

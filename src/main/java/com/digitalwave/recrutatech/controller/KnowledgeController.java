@@ -10,26 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.digitalwave.recrutatech.entity.Atitude;
-import com.digitalwave.recrutatech.interfaces.IAtitudeService;
+import com.digitalwave.recrutatech.entity.Knowledge;
+import com.digitalwave.recrutatech.interfaces.IKnowledgeService;
 
 @RestController
-@RequestMapping(value="/ati")
+@RequestMapping(value="/con")
 @CrossOrigin
-public class AtitudeController {
-	
+
+public class KnowledgeController {
 	@Autowired
-	private IAtitudeService service;
+	private IKnowledgeService service;
 	
 	@GetMapping("/")
-	public List<Atitude> allAtitude(){
-		return service.findAllAtitude();
+	public List<Knowledge> allKnowledge(){
+		return service.findAllKnowledge();
 	}
 	
 	@PostMapping("/add")
-	public Atitude newAtitude(@RequestBody Atitude atitude) {
-		return service.newAtitude(atitude);
+	public Knowledge newKnowledge(@RequestBody Knowledge knowledge) {
+		return service.newKnowledge(knowledge);
 	}
-
 
 }

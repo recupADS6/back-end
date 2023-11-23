@@ -120,4 +120,5 @@ public long getId() {
   public void setUpdatedAt(java.sql.Timestamp updatedAt) {
     this.updatedAt = updatedAt;
   }  
+  
 }

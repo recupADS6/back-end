@@ -8,14 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "atitude")
-public class Atitude {
+@Table(name = "ability")
+public class Ability {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "a_content",columnDefinition = "TEXT", length = 1500)
-    private String content;
+  @Column(name = "h_content",columnDefinition = "TEXT", length = 1500)
+  private String content;
 
 	public Long getId() {
 		return id;
@@ -33,15 +33,15 @@ public class Atitude {
 		this.content = content;
 	}
 
-    public void saveAtitude(String jsonResponse) {
-        this.content = jsonResponse;
-    }
+  public void saveAbility(String jsonResponse) {
+    this.content = jsonResponse;
+  }
 
-    @Override
-    public String toString() {
-        return "Attitude{" +
-                "Content='" + content + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "Hability{" +
+            "Content='" + content + '\'' +
+            '}';
+  }
 
 }
