@@ -22,12 +22,12 @@ public class JobService implements IJobService {
 	private JobRepository jobRepo;
 	
 	@Autowired
-	private KAARepository kaaRepo;
+	private KAARepository KAARepo;
 	
   @Override
   public Job newJob(Job job) {
     Long kaaId = job.getKAA().getId();
-    KAA kaa = kaaRepo.findById(kaaId)
+    KAA kaa = KAARepo.findById(kaaId)
             .orElseThrow(() -> new EntityNotFoundException("KAA não encontrado com o ID: " + kaaId));
     job.setKAA(kaa);
     return jobRepo.save(job);

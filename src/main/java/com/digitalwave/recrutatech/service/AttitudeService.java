@@ -17,19 +17,19 @@ import jakarta.persistence.EntityNotFoundException;
 public class AttitudeService implements IAttitudeService {
 	
 	@Autowired
-	private AttitudeRepository aRepo;
+	private AttitudeRepository AttitudeRepo;
 	
 	@Override
 	public Attitude newAttitude(Attitude attitude) {
-		return aRepo.save(attitude);
+		return AttitudeRepo.save(attitude);
 	}
 
 	public List<Attitude> findAllAttitude(){
-		return aRepo.findAll();
+		return AttitudeRepo.findAll();
 	}
 	
   public Attitude findAttitudeId(Long id) {
-    Optional<Attitude> aOp = aRepo.findById(id);
+    Optional<Attitude> aOp = AttitudeRepo.findById(id);
     if(aOp.isEmpty()) {
       throw new IllegalArgumentException("Attitude não encontrada!");
     }
@@ -38,7 +38,7 @@ public class AttitudeService implements IAttitudeService {
   
   @Override
   public Attitude updateAttitude(Long id, Attitude updateAttitude) {
-    Optional<Attitude> aOp = aRepo.findById(id);
+    Optional<Attitude> aOp = AttitudeRepo.findById(id);
 
     if (aOp.isPresent()) {
       Attitude existingAttitude = aOp.get();
@@ -47,14 +47,14 @@ public class AttitudeService implements IAttitudeService {
         existingAttitude.setContent(updateAttitude.getContent());
       }
 
-        return aRepo.save(existingAttitude);
+        return AttitudeRepo.save(existingAttitude);
     } else {
       throw new EntityNotFoundException("Attitude não encontrada - ID: " + id);
     }
   }
     
 	public void deleteAttitude(Long id) {
-		aRepo.deleteById(id);
+		AttitudeRepo.deleteById(id);
 	}
 
 }

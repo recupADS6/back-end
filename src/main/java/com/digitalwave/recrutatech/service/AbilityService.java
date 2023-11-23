@@ -17,19 +17,19 @@ import jakarta.persistence.EntityNotFoundException;
 public class AbilityService implements IAbilityService {
 	
 	@Autowired
-	private AbilityRepository hRepo;
+	private AbilityRepository AbilityRepo;
 	
 	@Override
 	public Ability newAbility(Ability ability) {
-		return hRepo.save(ability);
+		return AbilityRepo.save(ability);
 	}
 
 	public List<Ability> findAllAbility(){
-		return hRepo.findAll();
+		return AbilityRepo.findAll();
 	}
 	
   public Ability findAbilityId(Long id) {
-    Optional<Ability> hOp = hRepo.findById(id);
+    Optional<Ability> hOp = AbilityRepo.findById(id);
     if(hOp.isEmpty()) {
         throw new IllegalArgumentException("Ability não encontrada!");
     }
@@ -38,7 +38,7 @@ public class AbilityService implements IAbilityService {
   
   @Override
   public Ability updateAbility(Long id, Ability updateAbility) {
-    Optional<Ability> hOp = hRepo.findById(id);
+    Optional<Ability> hOp = AbilityRepo.findById(id);
 
     if (hOp.isPresent()) {
       Ability existingAbility = hOp.get();
@@ -47,14 +47,14 @@ public class AbilityService implements IAbilityService {
         existingAbility.setContent(updateAbility.getContent());
       }
 
-      return hRepo.save(existingAbility);
+      return AbilityRepo.save(existingAbility);
     } else {
       throw new EntityNotFoundException("Ability não encontrada - ID: " + id);
     }
   }
   
 	public void deleteAbility(Long id) {
-		hRepo.deleteById(id);
+		AbilityRepo.deleteById(id);
 	}
 
 }

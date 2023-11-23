@@ -17,19 +17,19 @@ import jakarta.persistence.EntityNotFoundException;
 public class KnowledgeService implements IKnowledgeService {
 	
 	@Autowired
-	private KnowledgeRepository cRepo;
+	private KnowledgeRepository KnowledgeRepo;
 	
 	@Override
 	public Knowledge newKnowledge(Knowledge knowledge) {
-		return cRepo.save(knowledge);
+		return KnowledgeRepo.save(knowledge);
 	}
 
 	public List<Knowledge> findAllKnowledge(){
-		return cRepo.findAll();
+		return KnowledgeRepo.findAll();
 	}
 	
   public Knowledge findKnowledgeId(Long id) {
-    Optional<Knowledge> cOp = cRepo.findById(id);
+    Optional<Knowledge> cOp = KnowledgeRepo.findById(id);
     if(cOp.isEmpty()) {
       throw new IllegalArgumentException("Knowledge não encontrado!");
     }
@@ -38,7 +38,7 @@ public class KnowledgeService implements IKnowledgeService {
     
   @Override
   public Knowledge updateKnowledge(Long id, Knowledge updateKnowledge) {
-    Optional<Knowledge> cOp = cRepo.findById(id);
+    Optional<Knowledge> cOp = KnowledgeRepo.findById(id);
 
     if (cOp.isPresent()) {
       Knowledge existingKnowledge = cOp.get();
@@ -47,14 +47,14 @@ public class KnowledgeService implements IKnowledgeService {
         existingKnowledge.setContent(updateKnowledge.getContent());
       }
 
-      return cRepo.save(existingKnowledge);
+      return KnowledgeRepo.save(existingKnowledge);
     } else {
       throw new EntityNotFoundException("Knowledge não encontrado - ID: " + id);
     }
   }
     
 	public void deleteKnowledge(Long id) {
-		cRepo.deleteById(id);
+		KnowledgeRepo.deleteById(id);
 	}
 
 }

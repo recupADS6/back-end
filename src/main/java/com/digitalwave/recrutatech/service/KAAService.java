@@ -22,51 +22,51 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class KAAService implements IKAAService {
   @Autowired
-  private KAARepository kaaRepo;
+  private KAARepository KAARepo;
 
   @Autowired
-  private KnowledgeRepository cRepo;
+  private KnowledgeRepository KnowledgeRepo;
 
   @Autowired
-  private AbilityRepository hRepo;
+  private AbilityRepository AbilityRepo;
   
   @Autowired
-  private AttitudeRepository aRepo;
+  private AttitudeRepository AttitudeRepo;
 
   public KAA createKAA(Knowledge knowledge, Ability ability, Attitude attitude) {
     KAA kaa = new KAA();
     kaa.setKnowledge(knowledge);
     kaa.setAbility(ability);
     kaa.setAttitude(attitude);
-    return kaaRepo.save(kaa);
+    return KAARepo.save(kaa);
   }
   
   @Override
   public KAA newKAA(KAA kaa) {
     Long knowledgeId = kaa.getKnowledge().getId();
-    Knowledge knowledge = cRepo.findById(knowledgeId)
+    Knowledge knowledge = KnowledgeRepo.findById(knowledgeId)
             .orElseThrow();
     kaa.setKnowledge(knowledge);
     
     Long abilityId = kaa.getAbility().getId();
-    Ability ability = hRepo.findById(abilityId)
+    Ability ability = AbilityRepo.findById(abilityId)
             .orElseThrow();
     kaa.setAbility(ability);
     
     Long attitudeId = kaa.getAttitude().getId();
-    Attitude attitude = aRepo.findById(attitudeId)
+    Attitude attitude = AttitudeRepo.findById(attitudeId)
             .orElseThrow();
     kaa.setAttitude(attitude);
     
-    return kaaRepo.save(kaa);
+    return KAARepo.save(kaa);
   }
 
 public List<KAA> findAllKAA(){
-  return kaaRepo.findAll();
+  return KAARepo.findAll();
 }
 
   public KAA findKAAId(Long id) {
-    Optional<KAA> kaaOp = kaaRepo.findById(id);
+    Optional<KAA> kaaOp = KAARepo.findById(id);
     
     if(kaaOp.isEmpty()) {
       throw new IllegalArgumentException("CHA não encontrado!");
@@ -77,7 +77,7 @@ public List<KAA> findAllKAA(){
   
   @Override
   public KAA updateKAA(Long id, KAA updateKAA) {
-    Optional<KAA> kaaOp = kaaRepo.findById(id);
+    Optional<KAA> kaaOp = KAARepo.findById(id);
 
     if (kaaOp.isPresent()) {
       KAA existingKAA = kaaOp.get();
@@ -93,14 +93,14 @@ public List<KAA> findAllKAA(){
         existingKAA.setAttitude(updateKAA.getAttitude());
       }
 
-        return kaaRepo.save(existingKAA);
+        return KAARepo.save(existingKAA);
     } else {
       throw new EntityNotFoundException("KAA não encontrado - ID: " + id);
     }
   }
     
 	public void deleteKAA(Long id) {
-		kaaRepo.deleteById(id);
+		KAARepo.deleteById(id);
 	}
 
 }
