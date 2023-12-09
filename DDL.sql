@@ -15,10 +15,24 @@ CREATE TABLE user (
     user_name VARCHAR(255),
     user_email VARCHAR(255),
     user_password VARCHAR(255),
-    user_role VARCHAR(255),
     user_status BOOLEAN,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
+);
+
+create table aut_autorizacao (
+    aut_id bigint unsigned not null auto_increment,
+    aut_nome varchar(20) not null,
+    primary key (aut_id),
+    unique key uni_aut_nome (aut_nome)
+);
+
+create table uau_usuario_autorizacao (
+    usr_id bigint unsigned not null,
+    aut_id bigint unsigned not null,
+    primary key (usr_id, aut_id),
+    foreign key aut_usuario_fk (usr_id) references user (usr_id) on delete restrict on update cascade,
+    foreign key aut_autorizacao_fk (aut_id) references aut_autorizacao (aut_id) on delete restrict on update cascade
 );
 
 CREATE TABLE job (
@@ -52,13 +66,21 @@ CREATE TABLE attitude (
     a_content TEXT
 );
 
-INSERT INTO user (user_name, user_email, user_password, user_role, user_status, created_at, updated_at)
-VALUES
-    ('Usuario1', 'usuario1@example.com', 'senha1', 'ROLE_USER', true, NOW(), NOW()),
-    ('Usuario2', 'usuario2@example.com', 'senha2', 'ROLE_USER', true, NOW(), NOW()),
-    ('Usuario3', 'usuario3@example.com', 'senha3', 'ROLE_ADMIN', true, NOW(), NOW()),
-    ('Usuario4', 'usuario4@example.com', 'senha4', 'ROLE_USER', false, NOW(), NOW());
+-- INSERT INTO user (user_name, user_email, user_password, user_status, created_at, updated_at)
+-- VALUES
+--     ('Usuario1', 'usuario1@example.com', 'senha1', true, NOW(), NOW()),
+--     ('Usuario2', 'usuario2@example.com', 'senha2', true, NOW(), NOW()),
+--     ('Usuario3', 'usuario3@example.com', 'senha3', true, NOW(), NOW()),
+--     ('Usuario4', 'usuario4@example.com', 'senha4', false, NOW(), NOW());
 
+insert into user (user_name, user_email, user_password, user_status, created_at, updated_at)
+    values ('admin', 'usuario1@example.com', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C', true, NOW(), NOW());
+
+insert into aut_autorizacao (aut_nome)
+    values ('ROLE_ADMIN');
+
+insert into uau_usuario_autorizacao (usr_id, aut_id) 
+    values (1, 1);
 
 INSERT INTO knowledge (c_content) VALUES 
 --P.O
