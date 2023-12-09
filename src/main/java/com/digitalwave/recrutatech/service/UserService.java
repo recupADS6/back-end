@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.digitalwave.recrutatech.entity.User;
+import com.digitalwave.recrutatech.entity.Usuario;
 import com.digitalwave.recrutatech.interfaces.IUserService;
 import com.digitalwave.recrutatech.repository.UserRepository;
 
@@ -25,46 +25,43 @@ public class UserService implements IUserService {
   private BCryptPasswordEncoder passwordEncoder;
 
   @Transactional
-  public User createUser(User user) {
-    validateUser(user);
+  public Usuario createUser(Usuario usuario) {
+    validateUser(usuario);
 
     // Criptografa a senha usando BCrypt
     passwordEncoder = new BCryptPasswordEncoder();
-    String hashedPassword = passwordEncoder.encode(user.getPassword());
-    user.setPassword(hashedPassword);
-    
-    user.setUserStatus(true); // Defina o status como true por padrão
-    user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-    user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-    return userRepo.save(user);
+    String hashedPassword = passwordEncoder.encode(usuario.getPassword());
+    usuario.setPassword(hashedPassword);
+
+    usuario.setUserStatus(true); // Defina o status como true por padrão
+    usuario.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+    usuario.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+    return userRepo.save(usuario);
   }
 
-  public List<User> getAllUsers() {
+  public List<Usuario> getAllUsers() {
     return userRepo.findAll();
   }
 
-  public User getById(Long id) {
+  public Usuario getById(Long id) {
     return userRepo.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
   }
 
   @Transactional
-  public User updateUser(Long id, User updatedUser) {
-    User existingUser = userRepo.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
+  public Usuario updateUser(Long id, Usuario updatedUser) {
+    Usuario existingUser = userRepo.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
 
     // Atualize os campos do usuário existente conforme necessário
-    if (!ObjectUtils.isEmpty(updatedUser.getUserName())) {
-        existingUser.setUserName(updatedUser.getUserName());
+    if (!ObjectUtils.isEmpty(updatedUser.getUsername())) {
+      existingUser.setUsername(updatedUser.getUsername());
     }
     if (!ObjectUtils.isEmpty(updatedUser.getEmail())) {
-        existingUser.setEmail(updatedUser.getEmail());
-    }
-    if (!ObjectUtils.isEmpty(updatedUser.getUserRole())) {
-        existingUser.setUserRole(updatedUser.getUserRole());
+      existingUser.setEmail(updatedUser.getEmail());
     }
     if (!ObjectUtils.isEmpty(updatedUser.getUserStatus())) {
-        existingUser.setUserStatus(updatedUser.getUserStatus());
+      existingUser.setUserStatus(updatedUser.getUserStatus());
     }
 
     existingUser.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
@@ -72,19 +69,20 @@ public class UserService implements IUserService {
   }
 
   @Transactional
-  public User deleteUser(Long id) {
-    User user = userRepo.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
+  public Usuario deleteUser(Long id) {
+    Usuario user = userRepo.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado - ID: " + id));
 
     userRepo.deleteById(id);
     return user;
   }
 
-  private void validateUser(User user) {
-    if (user == null || 
-        isNullOrBlank(user.getUserName()) || 
-        isNullOrBlank(user.getEmail()) || 
-        isNullOrBlank(user.getPassword())) {
+  private void validateUser(Usuario usuario) {
+    if (usuario == null ||
+        isNullOrBlank(usuario.getUsername()) ||
+        isNullOrBlank(usuario.getEmail()) ||
+        usuario.getAutorizacoes() == null ||
+        isNullOrBlank(usuario.getPassword())) {
       throw new IllegalArgumentException("Dados inválidos!");
     }
   }
@@ -92,5 +90,5 @@ public class UserService implements IUserService {
   private boolean isNullOrBlank(String value) {
     return value == null || value.trim().isEmpty();
   }
-  
+
 }
