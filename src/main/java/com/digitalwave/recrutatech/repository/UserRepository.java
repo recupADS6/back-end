@@ -8,5 +8,5 @@ import com.digitalwave.recrutatech.entity.Usuario;
 
 public interface UserRepository extends JpaRepository<Usuario, Long>{
 
-    public Optional<Usuario> findByUsername(String username);
+    public Optional<Usuario> findByEmail(String email);
 }

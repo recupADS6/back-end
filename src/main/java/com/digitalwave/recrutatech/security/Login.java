@@ -2,7 +2,7 @@ package com.digitalwave.recrutatech.security;
 
 public class Login {
 
-    private String username;
+    private String email;
     private String password;
     private String auth;
     private String token;
@@ -10,17 +10,17 @@ public class Login {
     public Login() {
     }
 
-    public Login(String username, String password) {
-        this.username = username;
+    public Login(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -46,4 +46,5 @@ public class Login {
     public void setAuth(String auth) {
         this.auth = auth;
     }
+
 }

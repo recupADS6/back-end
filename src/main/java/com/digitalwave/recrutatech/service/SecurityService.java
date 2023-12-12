@@ -21,13 +21,13 @@ public class SecurityService implements UserDetailsService{
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> usuarioOp = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Usuario> usuarioOp = userRepository.findByEmail(email);
         if(usuarioOp.isEmpty()) {
             throw new UsernameNotFoundException("Usuário não encontrado!");
         }
         Usuario usuario = usuarioOp.get();
-        return User.builder().username(username).password(usuario.getPassword())
+        return User.builder().username(email).password(usuario.getPassword())
             .authorities(usuario.getAutorizacoes().stream()
             .map(Autorizacao::getNome).collect(Collectors.toList())
             .toArray(new String[usuario.getAutorizacoes().size()]))

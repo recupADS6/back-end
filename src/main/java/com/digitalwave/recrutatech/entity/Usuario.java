@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,13 +42,12 @@ public class Usuario {
   @Column(name = "updated_at")
   private java.sql.Timestamp updatedAt;
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "uau_usuario_autorizacao", 
-    joinColumns = { @JoinColumn(name = "usr_id") }, 
-    inverseJoinColumns = {
-      
-  @JoinColumn(name = "aut_id") })
-  private List<Autorizacao> autorizacoes;
+  @ManyToMany
+    @JoinTable(name = "uau_usuario_autorizacao",
+        joinColumns = { @JoinColumn(name = "usr_id")},
+        inverseJoinColumns = { @JoinColumn(name = "aut_id") }
+        )
+    private List<Autorizacao> autorizacoes;
 
   public Usuario() {
     autorizacoes = new ArrayList<Autorizacao>();
